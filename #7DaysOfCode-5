@@ -1,0 +1,55 @@
+// Definimos las categorías
+const categorias = {
+  frutas: [],
+  lacteos: [],
+  congelados: [],
+  dulces: [],
+  otros: [] // Paro algo que no encaje en las otras categorias
+};
+
+// Función para agregar un alimento a la lista
+function agregarAlimento() {
+  const alimento = prompt("¿Qué alimento deseas agregar?");
+  const categoria = prompt(`¿En qué categoría se encaja "${alimento}"? (frutas, lacteos, congelados, dulces, otros)`);
+
+  if (categorias[categoria]) {
+    categorias[categoria].push(alimento);
+    console.log(`"${alimento}" ha sido agregado a la categoría "${categoria}".`);
+  } else {
+    console.log("Categoría no válida. El alimento no fue agregado.");
+  }
+}
+
+// Función para mostrar la lista de compras
+function mostrarLista() {
+  console.log("Lista de compras:");
+  for (const categoria in categorias) {
+    if (categorias[categoria].length > 0) {
+      console.log(`${categoria.charAt(0).toUpperCase() + categoria.slice(1)}: ${categorias[categoria].join(", ")}`);
+    } else {
+      console.log(`${categoria.charAt(0).toUpperCase() + categoria.slice(1)}: (vacío)`);
+    }
+  }
+}
+
+// Función principal
+function main() {
+  let agregarMas = true;
+
+  while (agregarMas) {
+    const respuesta = prompt("¿Deseas agregar un alimento a tu lista de compras? (sí/no)").toLowerCase();
+
+    if (respuesta === "sí" || respuesta === "si") {
+      agregarAlimento();
+    } else if (respuesta === "no") {
+      agregarMas = false;
+    } else {
+      console.log("Respuesta no válida. Por favor, responde con 'sí' o 'no'.");
+    }
+  }
+
+  mostrarLista();
+}
+
+// Ejecutamos el programa
+main();
